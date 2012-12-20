@@ -1,18 +1,19 @@
-typedef int (RLEproc)( const void *data, unsigned int size, void *arg );
+typedef char (rle_proc_t)( const void *data, unsigned char size, void *arg );
 
 
 typedef struct
 {
 	char data[128];
-	unsigned int size;
-	RLEproc *proc;
+	unsigned char size;
+	char *ptr;
+	rle_proc_t *proc;
 	void *arg;
-	int ret;
-} RLEenc;
+	char ret;
+} rle_enc_t;
 
 
-void rleEncInit( RLEenc *ctx, const RLEproc *proc, const void *arg );
+void rle_init_enc( rle_enc_t *ctx, const rle_proc_t *proc, const void *arg );
 
-int rleEncFinal( RLEenc *ctx );
+char rle_final_enc( rle_enc_t *ctx );
 
-int rleEncUpdate( RLEenc *ctx, const void *data, unsigned int size );
+char rle_update_enc( rle_enc_t *ctx, const void *data, unsigned char size );
