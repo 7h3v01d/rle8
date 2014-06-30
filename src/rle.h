@@ -1,9 +1,12 @@
+#define RLE_BUFF ( 1<<((sizeof(char)*8)-1) )
+
+
 typedef int (rle_proc_t)( const void *data, unsigned int size, void *arg );
 
 
 typedef struct
 {
-	char data[128];
+	char data[RLE_BUFF];
 	unsigned char size;
 	char *next;
 	char *ptr;
